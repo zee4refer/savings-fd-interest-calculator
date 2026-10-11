@@ -1,0 +1,10 @@
+const assert = require('assert');
+const { compound, compareSavings, fdMaturity } = require('./interest');
+let r = compound(100000, 7, 1, 'yearly');
+assert.strictEqual(r.interest, 7000);
+r = fdMaturity(100000, 7, 12);
+assert.strictEqual(r.maturity, 107185.9);
+const c = compareSavings(100000, 7, 1);
+assert.ok(c.daily.interest > c.monthly.interest && c.monthly.interest > c.quarterly.interest && c.quarterly.interest > c.yearly.interest);
+assert.strictEqual(c.daily.effectiveRate, 7.25);
+console.log('interest: all tests passed');
